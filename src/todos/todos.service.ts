@@ -21,7 +21,24 @@ export class ServiceToDos {
       },
     });
 
-    return MyTodos.todo;
+    const FilteredToDos = MyTodos.todo.sort((a, b) => {
+      if (a.isFavorite && !b.isFavorite) {
+        return -1; // a vem antes de b
+      } else if (!a.isFavorite && b.isFavorite) {
+        return 1; // b vem antes de a
+      } else {
+        // Se ambos são favoritos ou nenhum é favorito, ordenar por título
+        if (a.title > b.title) {
+          return 1;
+        } else if (a.title < b.title) {
+          return -1;
+        } else {
+          return 0;
+        }
+      }
+    });
+
+    return FilteredToDos;
   }
 
   async patchTodo(data: TodosPatch, id: string): Promise<any> {
