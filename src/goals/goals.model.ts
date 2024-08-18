@@ -12,6 +12,6 @@ export class Goal implements Prisma.GoalsCreateInput {
 export class GoalPatch implements Prisma.GoalsUpdateInput {
   title: string;
   fineshedAt?: null | Date;
-  isFavortite?: boolean;
+  isFavorite?: boolean;
   days?: number[] | Prisma.GoalsCreatedaysInput;
 }

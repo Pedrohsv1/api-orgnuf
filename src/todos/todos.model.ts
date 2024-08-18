@@ -6,7 +6,7 @@ export class Todos implements Prisma.ToDosCreateInput {
   content?: string;
   createdAt?: string | Date;
   fineshedAt?: string | Date;
-  isFavortite?: boolean;
+  isFavorite?: boolean;
   author: Prisma.UsersCreateNestedOneWithoutTodoInput;
 }
 
@@ -14,5 +14,5 @@ export class TodosPatch implements Prisma.ToDosUpdateInput {
   title: string;
   content?: string;
   fineshedAt?: null | Date;
-  isFavortite?: boolean;
+  isFavorite?: boolean;
 }
