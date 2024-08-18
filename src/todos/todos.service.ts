@@ -28,9 +28,9 @@ export class ServiceToDos {
         return 1; // b vem antes de a
       } else {
         // Se ambos são favoritos ou nenhum é favorito, ordenar por título
-        if (a.title > b.title) {
+        if (a.createdAt < b.createdAt) {
           return 1;
-        } else if (a.title < b.title) {
+        } else if (a.createdAt > b.createdAt) {
           return -1;
         } else {
           return 0;
