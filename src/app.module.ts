@@ -5,6 +5,7 @@ import { ToDosModule } from './todos/todos.module';
 import { ActivitiesModule } from './activities/activities.module';
 import { LinksModule } from './links/links.module';
 import { GoalsModule } from './goals/goal.module';
+import { AppController } from './app.controller';
 
 @Module({
   imports: [
@@ -15,7 +16,7 @@ import { GoalsModule } from './goals/goal.module';
     LinksModule,
     GoalsModule,
   ],
-  controllers: [],
+  controllers: [AppController],
   providers: [],
 })
 export class AppModule {}
