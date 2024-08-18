@@ -87,14 +87,11 @@ export class ActivitiesController {
 
       act.content = actDto.content;
       act.title = actDto.title;
-      act.isFavortite = actDto.isFavorite;
+      act.isFavorite = actDto.isFavorite;
       act.fineshedAt = actDto.fineshedAt;
       act.links = actDto.links;
 
-      const result = await this.activitieService.patchActivitie(
-        act,
-        id,
-      );
+      const result = await this.activitieService.patchActivitie(act, id);
       return response.status(200).json({
         status: 'Ok!',
         message: 'Activitie edited!',

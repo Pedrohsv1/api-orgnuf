@@ -85,7 +85,7 @@ export class GoalController {
       const goal = new GoalPatch();
 
       goal.title = goalDto.title;
-      goal.isFavortite = goalDto.isFavorite;
+      goal.isFavorite = goalDto.isFavorite;
       goal.fineshedAt = goalDto.fineshedAt;
       goal.days = goalDto.days;
 
