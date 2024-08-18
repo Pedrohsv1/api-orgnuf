@@ -1,0 +1,73 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Users {
+  id    String  @default(uuid()) @id
+  email String  @unique
+  name  String  @db.VarChar(100)
+  password String @db.VarChar(100)
+  username String @unique
+
+  todo ToDos[]
+  atividades Activities[]
+  goals Goals[]
+  
+}
+
+model ToDos {
+  id    String  @default(uuid()) @id
+  title String  @db.VarChar(100)
+  content String? @db.VarChar(300)
+  createdAt DateTime @default(now())
+  fineshedAt DateTime? 
+  isFavorite Boolean @default(false)
+
+  author Users @relation(fields: [authorId], references: [id])
+  authorId   String
+}
+
+model Activities {
+  id    String  @default(uuid()) @id
+  title String  @db.VarChar(100)
+  content String? @db.VarChar(300)
+  createdAt DateTime @default(now())
+  fineshedAt DateTime? 
+  isFavorite Boolean @default(false)
+
+  links Links[]
+  author Users @relation(fields: [authorId], references: [id])
+  authorId   String
+}
+
+model Goals {
+  id    String  @default(uuid()) @id
+  title String  @db.VarChar(100)
+  createdAt DateTime @default(now())
+  fineshedAt DateTime?
+  days Int[]
+
+  author Users @relation(fields: [authorId], references: [id])
+  authorId   String
+}
+
+
+model Links {
+  id    String     @default(uuid()) @id
+  name String  @db.VarChar(100)
+  link String @db.VarChar(300)
+
+  activities Activities @relation(fields: [activitiesId], references: [id])
+  activitiesId   String
+}
