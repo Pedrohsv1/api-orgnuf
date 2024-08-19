@@ -86,6 +86,7 @@ export class ToDosController {
       todo.title = todoDto.title;
       todo.isFavorite = todoDto.isFavorite;
       todo.fineshedAt = todoDto.fineshedAt;
+      todo.isCheck = todoDto.isCheck
 
       const result = await this.todoService.patchTodo(todo, id);
       return response.status(200).json({

@@ -7,6 +7,7 @@ export class IActivities implements Prisma.ActivitiesCreateInput {
   createdAt?: string | Date;
   fineshedAt?: string | Date;
   isFavorite?: boolean;
+  isCheck?: boolean;
   author: Prisma.UsersCreateNestedOneWithoutTodoInput;
   links?: Prisma.LinksCreateNestedManyWithoutActivitiesInput;
 }
@@ -17,4 +18,5 @@ export class IActivitiesPatch implements Prisma.ActivitiesUpdateInput {
   fineshedAt?: null | Date;
   links?: Prisma.LinksUpdateManyWithoutActivitiesNestedInput;
   isFavorite?: boolean;
+  isCheck?: boolean;
 }

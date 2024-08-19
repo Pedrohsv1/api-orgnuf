@@ -28,6 +28,8 @@ export class PatchActivitiesDto {
   @IsDate()
   fineshedAt?: null | Date;
 
-  links?: Prisma.LinksCreateNestedManyWithoutActivitiesInput;
+  @IsBoolean()
+  isCheck?: boolean;
 
+  links?: Prisma.LinksCreateNestedManyWithoutActivitiesInput;
 }

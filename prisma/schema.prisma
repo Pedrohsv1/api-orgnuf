@@ -31,7 +31,8 @@ model ToDos {
   title String  @db.VarChar(100)
   content String? @db.VarChar(300)
   createdAt DateTime @default(now())
-  fineshedAt DateTime? 
+  fineshedAt DateTime?
+  isCheck    Boolean @default(false)
   isFavorite Boolean @default(false)
 
   author Users @relation(fields: [authorId], references: [id])
@@ -43,7 +44,8 @@ model Activities {
   title String  @db.VarChar(100)
   content String? @db.VarChar(300)
   createdAt DateTime @default(now())
-  fineshedAt DateTime? 
+  fineshedAt DateTime?
+  isCheck    Boolean @default(false)
   isFavorite Boolean @default(false)
 
   links Links[]

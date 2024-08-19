@@ -22,6 +22,9 @@ export class PatchTodoDto {
   @IsBoolean()
   isFavorite?: boolean;
 
+  @IsBoolean()
+  isCheck?: boolean;
+
   @IsDate()
   fineshedAt?: null | Date;
 }

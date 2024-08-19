@@ -90,6 +90,7 @@ export class ActivitiesController {
       act.isFavorite = actDto.isFavorite;
       act.fineshedAt = actDto.fineshedAt;
       act.links = actDto.links;
+      act.isCheck = actDto.isCheck;
 
       const result = await this.activitieService.patchActivitie(act, id);
       return response.status(200).json({
