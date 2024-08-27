@@ -44,6 +44,8 @@ model Activities {
   title String  @db.VarChar(100)
   content String? @db.VarChar(300)
   createdAt DateTime @default(now())
+  DeadLineStart DateTime?
+  DeadLineEnd DateTime?
   fineshedAt DateTime?
   isCheck    Boolean @default(false)
   isFavorite Boolean @default(false)

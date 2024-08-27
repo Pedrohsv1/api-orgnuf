@@ -10,13 +10,23 @@ export class IActivities implements Prisma.ActivitiesCreateInput {
   isCheck?: boolean;
   author: Prisma.UsersCreateNestedOneWithoutTodoInput;
   links?: Prisma.LinksCreateNestedManyWithoutActivitiesInput;
+  DeadLineEnd?: string | Date;
+  DeadLineStart?: string | Date;
 }
 
 export class IActivitiesPatch implements Prisma.ActivitiesUpdateInput {
-  title: string;
+  title?: string;
   content?: string;
   fineshedAt?: null | Date;
   links?: Prisma.LinksUpdateManyWithoutActivitiesNestedInput;
   isFavorite?: boolean;
   isCheck?: boolean;
+  DeadLineEnd?:
+    | string
+    | Date
+    | Prisma.NullableDateTimeFieldUpdateOperationsInput;
+  DeadLineStart?:
+    | string
+    | Date
+    | Prisma.NullableDateTimeFieldUpdateOperationsInput;
 }

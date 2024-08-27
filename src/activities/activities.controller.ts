@@ -22,22 +22,25 @@ export class ActivitiesController {
 
   @Post()
   @UseGuards(JwtAuthGuard)
-  async CreateToDo(
+  async CreateActivitie(
     @Request() request: any,
     @Res() response: Response,
     @Body() actDto: CreateActivitiesDto,
   ): Promise<any> {
     try {
-      const todo = new IActivities();
-      todo.author = {
+      const act = new IActivities();
+      act.author = {
         connect: {
           id: request.user.id,
         },
       };
-      todo.title = actDto.title;
-      todo.content = actDto.content;
-      todo.links = actDto.links;
-      const result = await this.activitieService.createActivitie(todo);
+      act.title = actDto.title;
+      act.content = actDto.content;
+      act.links = actDto.links;
+      act.DeadLineEnd = actDto.DeadLineEnd;
+      act.DeadLineStart = actDto.DeadLineStart;
+
+      const result = await this.activitieService.createActivitie(act);
 
       return response.status(200).json({
         status: 'Ok!',
@@ -54,7 +57,7 @@ export class ActivitiesController {
 
   @Get()
   @UseGuards(JwtAuthGuard)
-  async GetAllMyToDos(
+  async GetAllMyActivities(
     @Request() request: any,
     @Res() response: Response,
   ): Promise<any> {
@@ -91,6 +94,8 @@ export class ActivitiesController {
       act.fineshedAt = actDto.fineshedAt;
       act.links = actDto.links;
       act.isCheck = actDto.isCheck;
+      act.DeadLineEnd = actDto.DeadLineEnd;
+      act.DeadLineStart = actDto.DeadLineStart;
 
       const result = await this.activitieService.patchActivitie(act, id);
       return response.status(200).json({
