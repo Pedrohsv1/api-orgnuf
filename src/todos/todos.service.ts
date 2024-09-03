@@ -21,10 +21,34 @@ export class ServiceToDos {
       },
     });
 
-    const FilteredToDos = MyTodos.todo.sort((a, b) => {
+    const filterCheckToDos = MyTodos.todo.filter((todo) => {
+      const isCheckExpired =
+        todo.isCheck &&
+        new Date(todo.fineshedAt.getTime() + 24 * 60 * 60 * 1000) > new Date();
+
+      return !todo.isCheck || isCheckExpired;
+    });
+
+    const filteredToDos = filterCheckToDos.sort((a, b) => {
       if (a.isFavorite && !b.isFavorite) {
-        return -1; // a vem antes de b
+        if (!a.isCheck && b.isCheck) {
+          return -1; // a vem antes de b
+        } else if (a.isCheck && !b.isCheck) {
+          return 1; // b vem antes de a
+        } else {
+          return -1; // a vem antes de b
+        }
       } else if (!a.isFavorite && b.isFavorite) {
+        if (!a.isCheck && b.isCheck) {
+          return -1; // a vem antes de b
+        } else if (a.isCheck && !b.isCheck) {
+          return 1; // a vem antes de b
+        } else {
+          return 1; // b vem antes de a
+        }
+      } else if (!a.isCheck && b.isCheck) {
+        return -1; // a vem antes de b
+      } else if (a.isCheck && !b.isCheck) {
         return 1; // b vem antes de a
       } else {
         // Se ambos são favoritos ou nenhum é favorito, ordenar por título
@@ -38,7 +62,7 @@ export class ServiceToDos {
       }
     });
 
-    return FilteredToDos;
+    return filteredToDos;
   }
 
   async patchTodo(data: TodosPatch, id: string): Promise<any> {
