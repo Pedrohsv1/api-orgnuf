@@ -1,0 +1,5 @@
+-- AlterTable
+ALTER TABLE "Activities" ALTER COLUMN "content" SET DATA TYPE VARCHAR;
+
+-- AlterTable
+ALTER TABLE "ToDos" ALTER COLUMN "content" SET DATA TYPE VARCHAR;

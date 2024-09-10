@@ -13,7 +13,7 @@ export class CreateActivitiesDto {
   title: string;
 
   @IsString()
-  @Length(3, 300)
+  @Length(3)
   content?: string;
 
   links?: Prisma.LinksCreateNestedManyWithoutActivitiesInput;
@@ -25,7 +25,7 @@ export class PatchActivitiesDto {
   title?: string;
 
   @IsString()
-  @Length(6, 300)
+  @Length(6)
   content?: string;
 
   @IsBoolean()

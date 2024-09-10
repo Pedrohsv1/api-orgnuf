@@ -6,7 +6,7 @@ export class CreateTodoDto {
   title: string;
 
   @IsString()
-  @Length(6, 300)
+  @Length(6)
   content?: string;
 }
 
@@ -16,7 +16,7 @@ export class PatchTodoDto {
   title?: string;
 
   @IsString()
-  @Length(6, 300)
+  @Length(6)
   content?: string;
 
   @IsBoolean()

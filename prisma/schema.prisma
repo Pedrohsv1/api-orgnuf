@@ -29,7 +29,7 @@ model Users {
 model ToDos {
   id    String  @default(uuid()) @id
   title String  @db.VarChar(100)
-  content String? @db.VarChar(300)
+  content String? @db.VarChar()
   createdAt DateTime @default(now())
   fineshedAt DateTime?
   isCheck    Boolean @default(false)
@@ -42,7 +42,7 @@ model ToDos {
 model Activities {
   id    String  @default(uuid()) @id
   title String  @db.VarChar(100)
-  content String? @db.VarChar(300)
+  content String? @db.VarChar()
   createdAt DateTime @default(now())
   DeadLineStart DateTime?
   DeadLineEnd DateTime?
