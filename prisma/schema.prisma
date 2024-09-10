@@ -59,6 +59,7 @@ model Goals {
   id    String  @default(uuid()) @id
   title String  @db.VarChar(100)
   createdAt DateTime @default(now())
+  isCheck    Boolean @default(false)
   fineshedAt DateTime?
   days Int[]
 
