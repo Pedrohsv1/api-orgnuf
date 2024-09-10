@@ -85,9 +85,9 @@ export class GoalController {
       const goal = new GoalPatch();
 
       goal.title = goalDto.title;
-      goal.isFavorite = goalDto.isFavorite;
       goal.fineshedAt = goalDto.fineshedAt;
       goal.days = goalDto.days;
+      goal.isCheck = goalDto.isCheck;
 
       const result = await this.goalService.patchGoal(goal, id);
       return response.status(200).json({

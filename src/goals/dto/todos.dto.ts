@@ -14,11 +14,11 @@ export class PatchGoalDto {
   @Length(3, 100)
   title?: string;
 
-  @IsBoolean()
-  isFavorite?: boolean;
-
   @IsDate()
   fineshedAt?: null | Date;
+
+  @IsBoolean()
+  isCheck?: boolean;
 
   days?: Prisma.GoalsCreatedaysInput;
 }

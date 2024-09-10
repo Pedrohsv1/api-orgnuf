@@ -6,12 +6,13 @@ export class Goal implements Prisma.GoalsCreateInput {
   createdAt?: string | Date;
   fineshedAt?: string | Date;
   days?: number[] | Prisma.GoalsCreatedaysInput;
+  isCheck?: boolean;
   author: Prisma.UsersCreateNestedOneWithoutGoalsInput;
 }
 
 export class GoalPatch implements Prisma.GoalsUpdateInput {
   title: string;
   fineshedAt?: null | Date;
-  isFavorite?: boolean;
+  isCheck?: boolean;
   days?: number[] | Prisma.GoalsCreatedaysInput;
 }
