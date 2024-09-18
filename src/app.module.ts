@@ -6,6 +6,7 @@ import { ActivitiesModule } from './activities/activities.module';
 import { LinksModule } from './links/links.module';
 import { GoalsModule } from './goals/goal.module';
 import { AppController } from './app.controller';
+import { CompletionsGoalsModule } from './completions-goals/completions-goals.module';
 
 @Module({
   imports: [
@@ -15,6 +16,7 @@ import { AppController } from './app.controller';
     ActivitiesModule,
     LinksModule,
     GoalsModule,
+    CompletionsGoalsModule,
   ],
   controllers: [AppController],
   providers: [],

@@ -59,19 +59,12 @@ export class GoalController {
     @Request() request: any,
     @Res() response: Response,
   ): Promise<any> {
-    try {
-      const result = await this.goalService.getAllMyGoals(request.user.id);
+      const result = await this.goalService.getTodaysGoals(request.user.id);
       return response.status(200).json({
         status: 'Ok!',
         message: 'To do created!',
         result: result,
       });
-    } catch {
-      return response.status(500).json({
-        status: 'Ok!',
-        message: 'Error server!',
-      });
-    }
   }
 
   @Patch(':id')

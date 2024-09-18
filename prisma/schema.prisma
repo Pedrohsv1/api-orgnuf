@@ -14,65 +14,71 @@ datasource db {
 }
 
 model Users {
-  id    String  @default(uuid()) @id
-  email String  @unique
-  name  String  @db.VarChar(100)
+  id       String @id @default(uuid())
+  email    String @unique
+  name     String @db.VarChar(100)
   password String @db.VarChar(100)
   username String @unique
 
-  todo ToDos[]
+  todo       ToDos[]
   atividades Activities[]
-  goals Goals[]
-  
+  goals      Goals[]
 }
 
 model ToDos {
-  id    String  @default(uuid()) @id
-  title String  @db.VarChar(100)
-  content String? @db.VarChar()
-  createdAt DateTime @default(now())
+  id         String    @id @default(uuid())
+  title      String    @db.VarChar(100)
+  content    String?   @db.VarChar()
+  createdAt  DateTime  @default(now())
   fineshedAt DateTime?
-  isCheck    Boolean @default(false)
-  isFavorite Boolean @default(false)
+  isCheck    Boolean   @default(false)
+  isFavorite Boolean   @default(false)
 
-  author Users @relation(fields: [authorId], references: [id])
-  authorId   String
+  author   Users  @relation(fields: [authorId], references: [id])
+  authorId String
 }
 
 model Activities {
-  id    String  @default(uuid()) @id
-  title String  @db.VarChar(100)
-  content String? @db.VarChar()
-  createdAt DateTime @default(now())
+  id            String    @id @default(uuid())
+  title         String    @db.VarChar(100)
+  content       String?   @db.VarChar()
+  createdAt     DateTime  @default(now())
   DeadLineStart DateTime?
-  DeadLineEnd DateTime?
-  fineshedAt DateTime?
-  isCheck    Boolean @default(false)
-  isFavorite Boolean @default(false)
+  DeadLineEnd   DateTime?
+  fineshedAt    DateTime?
+  isCheck       Boolean   @default(false)
+  isFavorite    Boolean   @default(false)
 
-  links Links[]
-  author Users @relation(fields: [authorId], references: [id])
-  authorId   String
+  links    Links[]
+  author   Users   @relation(fields: [authorId], references: [id])
+  authorId String
 }
 
 model Goals {
-  id    String  @default(uuid()) @id
-  title String  @db.VarChar(100)
-  createdAt DateTime @default(now())
-  isCheck    Boolean @default(false)
+  id         String    @id @default(uuid())
+  title      String    @db.VarChar(100)
+  createdAt  DateTime  @default(now())
+  isCheck    Boolean   @default(false)
   fineshedAt DateTime?
-  days Int[]
+  days       Int[]
 
-  author Users @relation(fields: [authorId], references: [id])
-  authorId   String
+  author          Users             @relation(fields: [authorId], references: [id])
+  authorId        String
+  CompletionGoals CompletionGoals[]
 }
 
-
 model Links {
-  id    String     @default(uuid()) @id
-  name String  @db.VarChar(100)
+  id   String @id @default(uuid())
+  name String @db.VarChar(100)
   link String @db.VarChar(300)
 
-  activities Activities @relation(fields: [activitiesId], references: [id])
-  activitiesId   String
+  activities   Activities @relation(fields: [activitiesId], references: [id])
+  activitiesId String
+}
+
+model CompletionGoals {
+  id        String   @id @default(uuid())
+  goalId    String
+  goal      Goals    @relation(fields: [goalId], references: [id])
+  createdAt DateTime @default(now())
 }
