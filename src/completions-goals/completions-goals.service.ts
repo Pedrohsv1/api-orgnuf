@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import type { PrismaService } from 'src/prisma.service';
-import type {
+import { PrismaService } from 'src/prisma.service';
+import {
   CompletionGoal,
   CompletionGoalResponse,
 } from './completions-goals.model';
@@ -51,6 +51,9 @@ export class CompletionsGoalsService {
       select: { id: true, createdAt: true },
       orderBy: { createdAt: 'asc' },
     });
+
+    // Ensure allGoals is sorted by createdAt
+    allGoals.sort((a, b) => dayjs(a.createdAt).diff(dayjs(b.createdAt)));
 
     let goalCount = 0;
     const groupedResults = completionGoals.reduce((acc, completionGoal) => {

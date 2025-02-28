@@ -5,6 +5,6 @@ import { CompletionsGoalsService } from './completions-goals.service';
 
 @Module({
   controllers: [CompletionsGoalsController],
-  providers: [PrismaService, CompletionsGoalsService],
+  providers: [CompletionsGoalsService, PrismaService],
 })
 export class CompletionsGoalsModule {}

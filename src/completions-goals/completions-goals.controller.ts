@@ -1,6 +1,6 @@
 import { Controller } from "@nestjs/common";
-import { CompletionsGoalsService } from "./completions-goals.service";
-import { CreateCompletionGoalDto } from "./dto/completions-goals.dto";
+import  { CompletionsGoalsService } from "./completions-goals.service";
+import  { CreateCompletionGoalDto } from "./dto/completions-goals.dto";
 import { CompletionGoal } from "./completions-goals.model";
 import { Body, Post, UseGuards } from "@nestjs/common";
 import { JwtAuthGuard } from "src/authentication/auth.guard";
