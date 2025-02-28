@@ -25,30 +25,34 @@ export class ServiceGoals {
     return MyGoals.goals;
   }
 
-  async getTodaysGoals(id: string): Promise<(Goals & { isCompleted: boolean })[]> {
+  async getTodaysGoals(
+    id: string,
+  ): Promise<(Goals & { isCompleted: boolean })[]> {
     const allGoals = await this.getAllMyGoals(id);
     const today = dayjs().startOf('day');
     const todayIndex = today.day() === 0 ? 7 : today.day(); // Convert Sunday from 0 to 7
-  
-    const goalsWithCompletions = await Promise.all(allGoals
-      .filter(goal => goal.days.includes(todayIndex))
-      .map(async goal => {
-        const completion = await this.prisma.completionGoals.findFirst({
-          where: {
-            goalId: goal.id,
-            createdAt: {
-              gte: today.toDate(),
-              lt: today.add(1, 'day').toDate(),
+
+    const goalsWithCompletions = await Promise.all(
+      allGoals
+        .filter((goal) => goal.days.includes(todayIndex))
+        .map(async (goal) => {
+          const completion = await this.prisma.completionGoals.findFirst({
+            where: {
+              goalId: goal.id,
+              createdAt: {
+                gte: today.toDate(),
+                lt: today.add(1, 'day').toDate(),
+              },
             },
-          },
-        });
-  
-        return {
-          ...goal,
-          isCompleted: !!completion,
-        };
-      }));
-  
+          });
+
+          return {
+            ...goal,
+            isCompleted: !!completion,
+          };
+        }),
+    );
+
     return goalsWithCompletions;
   }
 
