@@ -62,7 +62,7 @@ export class GoalController {
       const result = await this.goalService.getTodaysGoals(request.user.id);
       return response.status(200).json({
         status: 'Ok!',
-        message: 'To do created!',
+        message: 'Goal received!',
         result: result,
       });
   }

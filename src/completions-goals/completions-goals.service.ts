@@ -1,32 +1,36 @@
-import { Injectable } from "@nestjs/common";
-import { PrismaService } from "src/prisma.service";
-import type { CompletionGoal, CompletionGoalResponse } from "./completions-goals.model";
-import { Prisma } from "@prisma/client";
-import * as dayjs from "dayjs";
-import * as isSameOrBefore from "dayjs/plugin/isSameOrBefore";
+import { Injectable } from '@nestjs/common';
+import type { PrismaService } from 'src/prisma.service';
+import type {
+  CompletionGoal,
+  CompletionGoalResponse,
+} from './completions-goals.model';
+import type { Prisma } from '@prisma/client';
+import * as dayjs from 'dayjs';
+import * as isSameOrBefore from 'dayjs/plugin/isSameOrBefore';
 
 dayjs.extend(isSameOrBefore);
-dayjs.locale("pt-br");
+dayjs.locale('pt-br');
 
 @Injectable()
 export class CompletionsGoalsService {
   constructor(private prisma: PrismaService) {}
 
-  async createCompletionGoal(data: CompletionGoal): Promise<CompletionGoalResponse> {
-
+  async createCompletionGoal(
+    data: CompletionGoal,
+  ): Promise<CompletionGoalResponse> {
     const createData: Prisma.CompletionGoalsCreateInput = {
       goal: { connect: { id: data.goal.connect.id } },
     };
 
-    const result = await this.prisma.completionGoals.create({ data: createData });
+    const result = await this.prisma.completionGoals.create({
+      data: createData,
+    });
     return result;
   }
 
- 
-
   async getCompletionGoalsLast15Days() {
     const today = dayjs();
-  const fifteenDaysAgo = today.subtract(15, 'day');
+    const fifteenDaysAgo = today.subtract(15, 'day');
 
     const completionGoals = await this.prisma.completionGoals.findMany({
       where: {
@@ -51,14 +55,16 @@ export class CompletionsGoalsService {
     let goalCount = 0;
     const groupedResults = completionGoals.reduce((acc, completionGoal) => {
       const date = dayjs(completionGoal.createdAt).format('YYYY-MM-DD');
-      
+
       // Update goalCount based on goals created on or before this date
-      for (let i = 0; i < allGoals.length; i++) {
-        if (dayjs(allGoals[i].createdAt).isSameOrBefore(dayjs(completionGoal.createdAt).subtract(3, 'hour'), 'day')) {
-          goalCount++;
-        } else {
-          break;
-        }
+      while (
+        goalCount < allGoals.length &&
+        dayjs(allGoals[goalCount].createdAt).isSameOrBefore(
+          dayjs(completionGoal.createdAt).subtract(3, 'hour'),
+          'day',
+        )
+      ) {
+        goalCount++;
       }
 
       if (!acc[date]) {
@@ -72,6 +78,4 @@ export class CompletionsGoalsService {
 
     return groupedResults;
   }
-
 }
-
