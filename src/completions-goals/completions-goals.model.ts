@@ -1,4 +1,4 @@
-import type { Prisma } from "@prisma/client";
+import { Prisma } from "@prisma/client";
 
 export class CompletionGoal implements Prisma.CompletionGoalsCreateInput {
   goalId?: string;

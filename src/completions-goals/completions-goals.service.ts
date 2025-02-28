@@ -18,6 +18,7 @@ export class CompletionsGoalsService {
   async createCompletionGoal(
     data: CompletionGoal,
   ): Promise<CompletionGoalResponse> {
+
     const createData: Prisma.CompletionGoalsCreateInput = {
       goal: { connect: { id: data.goal.connect.id } },
     };
@@ -25,6 +26,7 @@ export class CompletionsGoalsService {
     const result = await this.prisma.completionGoals.create({
       data: createData,
     });
+    
     return result;
   }
 
