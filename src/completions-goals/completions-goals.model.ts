@@ -1,4 +1,4 @@
-import { Prisma } from "@prisma/client";
+import { Prisma } from '@prisma/client';
 
 export class CompletionGoal implements Prisma.CompletionGoalsCreateInput {
   goalId?: string;
@@ -12,3 +12,4 @@ export class CompletionGoalResponse {
   goalId: string;
   createdAt: Date;
 }
+// Compare this snippet from src/completions-goals/completions-goals.model.ts:

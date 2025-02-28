@@ -19,10 +19,10 @@ model Users {
   name     String @db.VarChar(100)
   password String @db.VarChar(100)
   username String @unique
-
-  todo       ToDos[]
+  
+  todo     ToDos[]
   atividades Activities[]
-  goals      Goals[]
+  goals    Goals[]
 }
 
 model ToDos {
@@ -55,16 +55,16 @@ model Activities {
 }
 
 model Goals {
-  id         String    @id @default(uuid())
-  title      String    @db.VarChar(100)
-  createdAt  DateTime  @default(now())
-  isCheck    Boolean   @default(false)
-  fineshedAt DateTime?
-  days       Int[]
-
-  author          Users             @relation(fields: [authorId], references: [id])
-  authorId        String
-  CompletionGoals CompletionGoals[]
+  id               String            @id @default(uuid())
+  title            String            @db.VarChar(100)
+  createdAt        DateTime          @default(now())
+  isCheck          Boolean           @default(false)
+  fineshedAt       DateTime?
+  days             Int[]
+  
+  authorId         String
+  author           Users             @relation(fields: [authorId], references: [id])
+  completionGoals  CompletionGoals[]
 }
 
 model Links {
@@ -78,7 +78,7 @@ model Links {
 
 model CompletionGoals {
   id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
   goalId    String
   goal      Goals    @relation(fields: [goalId], references: [id])
-  createdAt DateTime @default(now())
 }
